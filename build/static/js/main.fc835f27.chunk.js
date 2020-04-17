@@ -1,0 +1,2 @@
+(this.webpackJsonppractice=this.webpackJsonppractice||[]).push([[0],{3:function(e,t,r){e.exports=r(8)},8:function(e,t,r){"use strict";r.r(t);var n=r(0),a=r.n(n),c=r(2);var o=function(e){return console.log(e),a.a.createElement("div",{className:"alert alert-".concat(e.type||"success"),role:"alert"},e.children)};var s=function(){return a.a.createElement(o,{type:"danger"},"Invalid user id or password")};r.n(c).a.render(a.a.createElement(s,null),document.getElementById("root"))}},[[3,1,2]]]);
+//# sourceMappingURL=main.fc835f27.chunk.js.map
