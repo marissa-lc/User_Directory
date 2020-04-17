@@ -6,18 +6,39 @@ import EmployeeTable from './EmployeeTable';
 class Employee extends Component {
       state = {
         users: [],
+        order: "descending",
         filteredUsers: [],
       };
 
       handleOrder = () => {
         this.setState({
-          sortOrder: this.state.sortOrder === "ascending" ? "descending" : "descending"
+          order: this.state.order === "ascending" ? "descending" : "descending"
         });
         const sortedList = this.state.filteredUsers.sort(this.compare);
         this.setState({ filteredUsers: sortedList });
       };
 
-      handleSearch = event => {
+      compare = ( a, b ) => {
+        const aName = a.name.first;
+        const bName = b.name.first;
+          if(aName > bName) {
+            if (this.state.order === "descending") {
+              return -1;
+            } else if (this.state.order === "ascending") {
+              return 1;
+            }
+          }
+          if (aName < bName) {
+            if (this.state.order === "descending") {
+              return 1;
+            } else if (this.state.order === "ascending") {
+              return -1;
+            }
+          }
+          return 0;
+      };
+
+      handleChange = event => {
         const filter = event.target.value;
         const filteredUsers = this.state.users.filter(item => {
           let values = item.name.first.toLowerCase();
@@ -43,9 +64,8 @@ class Employee extends Component {
   render() {
     return (
       <div>
-        <Search handleSearch={this.handleSearch}/>
-        <table>
-          <br></br>
+        <Search handleChange={this.handleChange}/>
+        <tbody>
           <tr>
             <th></th>
             <th onClick={this.handleOrder.bind(this)}>
@@ -59,8 +79,6 @@ class Employee extends Component {
             Location
             </th>
           </tr>
-          <tbody>
-
           {this.state.filteredUsers.map((item, result) => (
             <EmployeeTable
             thumbnail = {item.picture.medium}
@@ -71,7 +89,6 @@ class Employee extends Component {
             />
           ))}
           </tbody>
-        </table>
       </div>
     )};
   }
